@@ -5,7 +5,7 @@ import Controller from './Controller';
 
 export const display = new Display();
 export const game = new Game();
-export const controller = new Controller();
+// export const controller = new Controller();
 
 function setup() {
     display.createCanvas();
@@ -25,7 +25,36 @@ export function start() {
     game.start();
 }
 
+function movementController() {
+    let a = false;
+    let d = false;
+
+
+    window.addEventListener('keydown', (e) => {
+        switch(e.keyCode) {
+            case 13: start(); break;
+            case 65: game.world.moveCar(-1); a = true; break;
+            case 68: game.world.moveCar(1); d = true; break;
+        }
+    });
+
+    window.addEventListener('keyup', (e) => {
+        switch(e.keyCode) {
+            case 65: a = false; break;
+            case 68: d = false; break;
+        }
+
+        if (a === false && d === false) {
+            game.world.stopCar();
+        }
+    });
+}
+
+movementController();
 setup();
 
-window.addEventListener('keydown', controller.keyPressed);
-window.addEventListener('keyup', controller.keyReleased);
+// window.addEventListener('keydown', controller.keyPressed);
+// window.addEventListener('keyup', controller.keyReleased);
+
+
+

@@ -135,69 +135,35 @@ function () {
 /*!******************************!*\
   !*** ./src/es/Controller.js ***!
   \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Controller; });
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index */ "./src/es/index.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-var Controller =
-/*#__PURE__*/
-function () {
-  function Controller() {
-    _classCallCheck(this, Controller);
-
-    this.isKeyPressed = false;
-    this.isKeyReleased = true;
-  }
-
-  _createClass(Controller, [{
-    key: "keyPressed",
-    value: function keyPressed(e) {
-      // console.log(e.keyCode);
-      switch (e.keyCode) {
-        case 13:
-          Object(_index__WEBPACK_IMPORTED_MODULE_0__["start"])();
-          break;
-
-        case 65:
-          _index__WEBPACK_IMPORTED_MODULE_0__["game"].world.moveCar(-1);
-          break;
-
-        case 68:
-          _index__WEBPACK_IMPORTED_MODULE_0__["game"].world.moveCar(1);
-          break;
-      }
-    }
-  }, {
-    key: "keyReleased",
-    value: function keyReleased(e) {
-      switch (e.keyCode) {
-        // case 87: game.world.speed = 0; break;
-        case 65:
-          _index__WEBPACK_IMPORTED_MODULE_0__["game"].world.stopCar();
-          break;
-
-        case 68:
-          _index__WEBPACK_IMPORTED_MODULE_0__["game"].world.stopCar();
-          break;
-      }
-    }
-  }]);
-
-  return Controller;
-}();
-
-
+// import {game, start} from './index';
+// export default class Controller {
+//     constructor() {
+//         this.aPressed = false;
+//         this.dPressed = false;
+//     }
+//     keyPressed(e) {
+//         switch(e.keyCode) {
+//             case 13: start(); break;
+//             case 65: game.world.moveCar(-1); this.aPressed = true; break;
+//             case 68: game.world.moveCar(1); this.dPressed = true; break;
+//         }
+//         console.log(this.aPressed);
+//         console.log(this.dPressed);
+//     }
+//     keyReleased(e) {
+//         switch(e.keyCode) {
+//             // case 87: game.world.speed = 0; break;
+//             case 65: this.aPressed = false; break;
+//             case 68: this.dPressed = false; break;
+//         }
+//         if (this.aPressed === false && this.dPressed === false) {
+//             game.world.stopCar();
+//         }
+//     }
+// }
 
 /***/ }),
 
@@ -442,27 +408,26 @@ function () {
 /*!*************************!*\
   !*** ./src/es/index.js ***!
   \*************************/
-/*! exports provided: display, game, controller, start */
+/*! exports provided: display, game, start */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "display", function() { return display; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "game", function() { return game; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "controller", function() { return controller; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "start", function() { return start; });
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/style.scss */ "./src/sass/style.scss");
 /* harmony import */ var _sass_style_scss__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_sass_style_scss__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Display__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Display */ "./src/es/Display.js");
 /* harmony import */ var _Game__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Game */ "./src/es/Game.js");
 /* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Controller */ "./src/es/Controller.js");
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Controller__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
 
 var display = new _Display__WEBPACK_IMPORTED_MODULE_1__["default"]();
-var game = new _Game__WEBPACK_IMPORTED_MODULE_2__["default"]();
-var controller = new _Controller__WEBPACK_IMPORTED_MODULE_3__["default"]();
+var game = new _Game__WEBPACK_IMPORTED_MODULE_2__["default"](); // export const controller = new Controller();
 
 function setup() {
   display.createCanvas(); //intro
@@ -480,9 +445,47 @@ function start() {
   game.update();
   game.start();
 }
-setup();
-window.addEventListener('keydown', controller.keyPressed);
-window.addEventListener('keyup', controller.keyReleased);
+
+function movementController() {
+  var a = false;
+  var d = false;
+  window.addEventListener('keydown', function (e) {
+    switch (e.keyCode) {
+      case 13:
+        start();
+        break;
+
+      case 65:
+        game.world.moveCar(-1);
+        a = true;
+        break;
+
+      case 68:
+        game.world.moveCar(1);
+        d = true;
+        break;
+    }
+  });
+  window.addEventListener('keyup', function (e) {
+    switch (e.keyCode) {
+      case 65:
+        a = false;
+        break;
+
+      case 68:
+        d = false;
+        break;
+    }
+
+    if (a === false && d === false) {
+      game.world.stopCar();
+    }
+  });
+}
+
+movementController();
+setup(); // window.addEventListener('keydown', controller.keyPressed);
+// window.addEventListener('keyup', controller.keyReleased);
 
 /***/ }),
 
