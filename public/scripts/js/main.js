@@ -334,14 +334,14 @@ function () {
 
   _createClass(World, [{
     key: "createRoad",
-    value: function createRoad() {
-      _index__WEBPACK_IMPORTED_MODULE_0__["display"].context.fillStyle = this.roadColor;
-      _index__WEBPACK_IMPORTED_MODULE_0__["display"].context.fillRect(0, 0, _index__WEBPACK_IMPORTED_MODULE_0__["display"].width, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height);
+    value: function createRoad(ctx, w, h, color) {
+      ctx.fillStyle = color;
+      ctx.fillRect(0, 0, w, h);
     }
   }, {
     key: "createRoadLines",
-    value: function createRoadLines() {
-      for (var i = 0; i < 4; i++) {
+    value: function createRoadLines(lines) {
+      for (var i = 0; i < lines.length; i++) {
         _index__WEBPACK_IMPORTED_MODULE_0__["display"].context.fillStyle = this.linesColor;
         _index__WEBPACK_IMPORTED_MODULE_0__["display"].context.fillRect(this.roadLinesVec[i].x, this.roadLinesVec[i].y, this.lineWidth, this.lineHeight);
       }
@@ -391,8 +391,8 @@ function () {
   }, {
     key: "show",
     value: function show() {
-      this.createRoad();
-      this.createRoadLines();
+      this.createRoad(_index__WEBPACK_IMPORTED_MODULE_0__["display"].context, _index__WEBPACK_IMPORTED_MODULE_0__["display"].width, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height, this.roadColor);
+      this.createRoadLines(this.roadLinesVec);
       this.playerCar.show(this.playerCar.pos.x, this.playerCar.pos.y, this.playerCar.width, this.playerCar.height);
     }
   }]);

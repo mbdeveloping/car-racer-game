@@ -31,13 +31,13 @@ export default class World {
         this.playerCar = new Car(20, display.height - 120, 80, 100, this.playerCarXdir)
     }
 
-    createRoad() {
-        display.context.fillStyle = this.roadColor;
-        display.context.fillRect(0, 0, display.width, display.height);
+    createRoad(ctx,w,h,color) {
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, w, h);
     }
 
-    createRoadLines() {
-        for (let i=0; i<4; i++) {
+    createRoadLines(lines) {
+        for (let i=0; i<lines.length; i++) {
             display.context.fillStyle = this.linesColor;
             display.context.fillRect(this.roadLinesVec[i].x, this.roadLinesVec[i].y, this.lineWidth, this.lineHeight);
         }
@@ -85,8 +85,8 @@ export default class World {
     }
 
     show() {
-        this.createRoad();
-        this.createRoadLines();
+        this.createRoad(display.context, display.width, display.height, this.roadColor);
+        this.createRoadLines(this.roadLinesVec);
         this.playerCar.show(this.playerCar.pos.x, this.playerCar.pos.y, this.playerCar.width,this.playerCar.height);
     }
 }
