@@ -44,11 +44,19 @@ export default class World {
     }
 
     moveCar(dir) {
-        this.playerCarXdir = dir * 4;
+        this.playerCarXdir = dir * 6;
     }
 
     stopCar() {
         this.playerCarXdir = 0;
+    }
+
+    collideObject() {
+        if (this.playerCar.pos.x < 0) {
+            this.playerCar.pos.x = 0;
+        } else if (this.playerCar.pos.x + this.playerCar.width >= display.width) {
+            this.playerCar.pos.x = display.width - this.playerCar.width;
+        }
     }
 
     update() {
@@ -73,6 +81,7 @@ export default class World {
         //Update player car position
         this.playerCar.pos.x += this.playerCarXdir;
         
+        this.collideObject();
     }
 
     show() {
