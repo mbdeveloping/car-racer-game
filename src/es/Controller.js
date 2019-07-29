@@ -19,6 +19,7 @@ export default class Controller {
         switch(e.keyCode) {
             // case 87: game.world.speed = 0; break;
             case 65: game.world.stopCar(); break;
+            case 68: game.world.stopCar(); break;
         }
     }
 }

@@ -19,7 +19,7 @@ function setup() {
 }
 
 export function start() {
-    requestAnimationFrame(start);
+    requestAnimationFrame(start); 
     display.context.clearRect(0, 0, display.width, display.height);
     game.update();
     game.start();
