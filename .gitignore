@@ -2,3 +2,4 @@
 .idea
 
 /public/scripts/*/*.map
+/public/scripts/js/main.js

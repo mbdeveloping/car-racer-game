@@ -186,6 +186,10 @@ function () {
         case 65:
           _index__WEBPACK_IMPORTED_MODULE_0__["game"].world.stopCar();
           break;
+
+        case 68:
+          _index__WEBPACK_IMPORTED_MODULE_0__["game"].world.stopCar();
+          break;
       }
     }
   }]);
@@ -379,12 +383,21 @@ function () {
   }, {
     key: "moveCar",
     value: function moveCar(dir) {
-      this.playerCarXdir = dir * 4;
+      this.playerCarXdir = dir * 6;
     }
   }, {
     key: "stopCar",
     value: function stopCar() {
       this.playerCarXdir = 0;
+    }
+  }, {
+    key: "collideObject",
+    value: function collideObject() {
+      if (this.playerCar.pos.x < 0) {
+        this.playerCar.pos.x = 0;
+      } else if (this.playerCar.pos.x + this.playerCar.width >= _index__WEBPACK_IMPORTED_MODULE_0__["display"].width) {
+        this.playerCar.pos.x = _index__WEBPACK_IMPORTED_MODULE_0__["display"].width - this.playerCar.width;
+      }
     }
   }, {
     key: "update",
@@ -407,6 +420,7 @@ function () {
 
 
       this.playerCar.pos.x += this.playerCarXdir;
+      this.collideObject();
     }
   }, {
     key: "show",
