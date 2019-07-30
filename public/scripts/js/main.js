@@ -373,6 +373,11 @@ function () {
       }
     }
   }, {
+    key: "updateCarPos",
+    value: function updateCarPos() {
+      this.playerCar.pos.x += this.playerCar.xDir;
+    }
+  }, {
     key: "collideObject",
     value: function collideObject() {
       if (this.playerCar.pos.x < 0) {
@@ -385,9 +390,8 @@ function () {
     key: "update",
     value: function update() {
       this.moveLines();
-      this.restoreLines(); //Update player car position
-
-      this.playerCar.pos.x += this.playerCar.xDir;
+      this.restoreLines();
+      this.updateCarPos();
       this.collideObject();
     }
   }, {

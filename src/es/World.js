@@ -57,6 +57,10 @@ export default class World {
         }
     }
 
+    updateCarPos() {
+        this.playerCar.pos.x += this.playerCar.xDir;
+    }
+
     collideObject() {
         if (this.playerCar.pos.x < 0) {
             this.playerCar.pos.x = 0;
@@ -68,10 +72,7 @@ export default class World {
     update() {
         this.moveLines();
         this.restoreLines();
-
-        //Update player car position
-        this.playerCar.pos.x += this.playerCar.xDir;
-        
+        this.updateCarPos();
         this.collideObject();
     }
 
