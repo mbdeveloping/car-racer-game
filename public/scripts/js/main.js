@@ -357,6 +357,22 @@ function () {
       }
     }
   }, {
+    key: "moveLines",
+    value: function moveLines() {
+      for (var i = 0; i < this.roadLinesVec.length; i++) {
+        this.roadLinesVec[i].y += this.speed;
+      }
+    }
+  }, {
+    key: "restoreLines",
+    value: function restoreLines() {
+      for (var i = 0; i < this.roadLinesVec.length; i++) {
+        if (this.roadLinesVec[i].y >= _index__WEBPACK_IMPORTED_MODULE_0__["display"].height) {
+          this.roadLinesVec[i].y = -this.lineHeight * 2;
+        }
+      }
+    }
+  }, {
     key: "collideObject",
     value: function collideObject() {
       if (this.playerCar.pos.x < 0) {
@@ -368,22 +384,8 @@ function () {
   }, {
     key: "update",
     value: function update() {
-      //move road lines
-      this.roadLinesVec[0].y += this.speed;
-      this.roadLinesVec[1].y += this.speed;
-      this.roadLinesVec[2].y += this.speed;
-      this.roadLinesVec[3].y += this.speed; //restore road lines to starting point
-
-      if (this.roadLinesVec[0].y >= _index__WEBPACK_IMPORTED_MODULE_0__["display"].height) {
-        this.roadLinesVec[0].y = -this.lineHeight * 2;
-      } else if (this.roadLinesVec[1].y >= _index__WEBPACK_IMPORTED_MODULE_0__["display"].height) {
-        this.roadLinesVec[1].y = -this.lineHeight * 2;
-      } else if (this.roadLinesVec[2].y >= _index__WEBPACK_IMPORTED_MODULE_0__["display"].height) {
-        this.roadLinesVec[2].y = -this.lineHeight * 2;
-      } else if (this.roadLinesVec[3].y >= _index__WEBPACK_IMPORTED_MODULE_0__["display"].height) {
-        this.roadLinesVec[3].y = -this.lineHeight * 2;
-      } //Update player car position
-
+      this.moveLines();
+      this.restoreLines(); //Update player car position
 
       this.playerCar.pos.x += this.playerCar.xDir;
       this.collideObject();

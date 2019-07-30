@@ -43,6 +43,20 @@ export default class World {
         }
     }
 
+    moveLines() {
+        for (let i=0; i < this.roadLinesVec.length; i++) {
+            this.roadLinesVec[i].y += this.speed;
+        }
+    }
+
+    restoreLines() {
+        for (let i=0; i < this.roadLinesVec.length; i++) {
+            if (this.roadLinesVec[i].y >= display.height) {
+                this.roadLinesVec[i].y = -this.lineHeight * 2;
+            }
+        }
+    }
+
     collideObject() {
         if (this.playerCar.pos.x < 0) {
             this.playerCar.pos.x = 0;
@@ -52,23 +66,8 @@ export default class World {
     }
 
     update() {
-        //move road lines
-        this.roadLinesVec[0].y += this.speed;
-        this.roadLinesVec[1].y += this.speed;
-        this.roadLinesVec[2].y += this.speed;
-        this.roadLinesVec[3].y += this.speed;
-
-        //restore road lines to starting point
-        if (this.roadLinesVec[0].y >= display.height) {
-            this.roadLinesVec[0].y = -this.lineHeight * 2;
-        } else if (this.roadLinesVec[1].y >= display.height) {
-            this.roadLinesVec[1].y = -this.lineHeight * 2;
-        } else if (this.roadLinesVec[2].y >= display.height) {
-            this.roadLinesVec[2].y = -this.lineHeight * 2;
-        }
-        else if (this.roadLinesVec[3].y >= display.height) {
-            this.roadLinesVec[3].y = -this.lineHeight * 2;
-        }
+        this.moveLines();
+        this.restoreLines();
 
         //Update player car position
         this.playerCar.pos.x += this.playerCar.xDir;
