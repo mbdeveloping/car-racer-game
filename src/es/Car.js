@@ -12,7 +12,7 @@ export default class Car {
     }
 
     moveCar(dir) {
-        this.xDir = dir * 6;
+        this.xDir = dir * 7;
     }
 
     stopCar() {

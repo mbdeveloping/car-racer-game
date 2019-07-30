@@ -120,7 +120,7 @@ function () {
   _createClass(Car, [{
     key: "moveCar",
     value: function moveCar(dir) {
-      this.xDir = dir * 6;
+      this.xDir = dir * 7;
     }
   }, {
     key: "stopCar",
@@ -339,8 +339,7 @@ function () {
     }, {
       x: _index__WEBPACK_IMPORTED_MODULE_0__["display"].width / 2 - this.lineWidth / 2,
       y: 400
-    }], this.speed = 2, // this.playerCarXdir = 0,
-    this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100);
+    }], this.speed = 2, this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100);
   }
 
   _createClass(World, [{
@@ -479,7 +478,6 @@ function movementController() {
     }
 
     if (a === false && d === false) {
-      // game.world.stopCar();
       game.world.playerCar.stopCar();
     }
   });

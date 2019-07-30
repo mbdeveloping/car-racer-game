@@ -44,7 +44,6 @@ function movementController() {
         }
 
         if (a === false && d === false) {
-            // game.world.stopCar();
             game.world.playerCar.stopCar();
         }
     });

@@ -27,7 +27,6 @@ export default class World {
             }
         ],
         this.speed = 2,
-        // this.playerCarXdir = 0,
         this.playerCar = new Car(20, display.height - 120, 80, 100)
 
     }
