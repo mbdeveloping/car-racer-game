@@ -29,12 +29,11 @@ function movementController() {
     let a = false;
     let d = false;
 
-
     window.addEventListener('keydown', (e) => {
         switch(e.keyCode) {
             case 13: start(); break;
-            case 65: game.world.moveCar(-1); a = true; break;
-            case 68: game.world.moveCar(1); d = true; break;
+            case 65: game.world.playerCar.moveCar(-1); a = true; break;
+            case 68: game.world.playerCar.moveCar(1); d = true; break;
         }
     });
 
@@ -45,7 +44,8 @@ function movementController() {
         }
 
         if (a === false && d === false) {
-            game.world.stopCar();
+            // game.world.stopCar();
+            game.world.playerCar.stopCar();
         }
     });
 }

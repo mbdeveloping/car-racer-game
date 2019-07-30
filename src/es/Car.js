@@ -6,8 +6,17 @@ export default class Car {
             x: x,
             y: y
         },
+        this.xDir = 0,
         this.width = width,
         this.height = height
+    }
+
+    moveCar(dir) {
+        this.xDir = dir * 6;
+    }
+
+    stopCar() {
+        this.xDir = 0;
     }
 
     show() {

@@ -114,10 +114,20 @@ function () {
     this.pos = {
       x: x,
       y: y
-    }, this.width = width, this.height = height;
+    }, this.xDir = 0, this.width = width, this.height = height;
   }
 
   _createClass(Car, [{
+    key: "moveCar",
+    value: function moveCar(dir) {
+      this.xDir = dir * 6;
+    }
+  }, {
+    key: "stopCar",
+    value: function stopCar() {
+      this.xDir = 0;
+    }
+  }, {
     key: "show",
     value: function show() {
       _index__WEBPACK_IMPORTED_MODULE_0__["display"].drawObject(this.pos.x, this.pos.y, this.width, this.height);
@@ -329,7 +339,8 @@ function () {
     }, {
       x: _index__WEBPACK_IMPORTED_MODULE_0__["display"].width / 2 - this.lineWidth / 2,
       y: 400
-    }], this.speed = 2, this.playerCarXdir = 0, this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100, this.playerCarXdir);
+    }], this.speed = 2, // this.playerCarXdir = 0,
+    this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100);
   }
 
   _createClass(World, [{
@@ -345,16 +356,6 @@ function () {
         _index__WEBPACK_IMPORTED_MODULE_0__["display"].context.fillStyle = this.linesColor;
         _index__WEBPACK_IMPORTED_MODULE_0__["display"].context.fillRect(this.roadLinesVec[i].x, this.roadLinesVec[i].y, this.lineWidth, this.lineHeight);
       }
-    }
-  }, {
-    key: "moveCar",
-    value: function moveCar(dir) {
-      this.playerCarXdir = dir * 6;
-    }
-  }, {
-    key: "stopCar",
-    value: function stopCar() {
-      this.playerCarXdir = 0;
     }
   }, {
     key: "collideObject",
@@ -385,7 +386,7 @@ function () {
       } //Update player car position
 
 
-      this.playerCar.pos.x += this.playerCarXdir;
+      this.playerCar.pos.x += this.playerCar.xDir;
       this.collideObject();
     }
   }, {
@@ -456,12 +457,12 @@ function movementController() {
         break;
 
       case 65:
-        game.world.moveCar(-1);
+        game.world.playerCar.moveCar(-1);
         a = true;
         break;
 
       case 68:
-        game.world.moveCar(1);
+        game.world.playerCar.moveCar(1);
         d = true;
         break;
     }
@@ -478,7 +479,8 @@ function movementController() {
     }
 
     if (a === false && d === false) {
-      game.world.stopCar();
+      // game.world.stopCar();
+      game.world.playerCar.stopCar();
     }
   });
 }

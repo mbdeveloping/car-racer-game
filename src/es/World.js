@@ -27,8 +27,9 @@ export default class World {
             }
         ],
         this.speed = 2,
-        this.playerCarXdir = 0,
-        this.playerCar = new Car(20, display.height - 120, 80, 100, this.playerCarXdir)
+        // this.playerCarXdir = 0,
+        this.playerCar = new Car(20, display.height - 120, 80, 100)
+
     }
 
     createRoad(ctx,w,h,color) {
@@ -41,14 +42,6 @@ export default class World {
             display.context.fillStyle = this.linesColor;
             display.context.fillRect(this.roadLinesVec[i].x, this.roadLinesVec[i].y, this.lineWidth, this.lineHeight);
         }
-    }
-
-    moveCar(dir) {
-        this.playerCarXdir = dir * 6;
-    }
-
-    stopCar() {
-        this.playerCarXdir = 0;
     }
 
     collideObject() {
@@ -79,7 +72,7 @@ export default class World {
         }
 
         //Update player car position
-        this.playerCar.pos.x += this.playerCarXdir;
+        this.playerCar.pos.x += this.playerCar.xDir;
         
         this.collideObject();
     }
