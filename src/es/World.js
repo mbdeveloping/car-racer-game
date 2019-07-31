@@ -27,8 +27,11 @@ export default class World {
             }
         ],
         this.speed = 2,
-        this.playerCar = new Car(20, display.height - 120, 80, 100)
-
+        this.playerCar = new Car(20, display.height - 120, 80, 100),
+        this.carsData = [
+            "black", "green", "yellow"
+        ],
+        this.npc = []
     }
 
     createRoad(ctx,w,h,color) {
@@ -54,6 +57,12 @@ export default class World {
             if (this.roadLinesVec[i].y >= display.height) {
                 this.roadLinesVec[i].y = -this.lineHeight * 2;
             }
+        }
+    }
+
+    createNpc() {
+        for (let i=0; i<this.carsData; i++) {
+            this.npc[i].push(new Car());
         }
     }
 

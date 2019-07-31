@@ -114,7 +114,7 @@ function () {
     this.pos = {
       x: x,
       y: y
-    }, this.xDir = 0, this.width = width, this.height = height;
+    }, this.xDir = 0, this.yDir = 0, this.width = width, this.height = height;
   }
 
   _createClass(Car, [{
@@ -339,7 +339,7 @@ function () {
     }, {
       x: _index__WEBPACK_IMPORTED_MODULE_0__["display"].width / 2 - this.lineWidth / 2,
       y: 400
-    }], this.speed = 2, this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100);
+    }], this.speed = 2, this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100), this.carsData = ["black", "green", "yellow"], this.npc = [];
   }
 
   _createClass(World, [{
@@ -370,6 +370,13 @@ function () {
         if (this.roadLinesVec[i].y >= _index__WEBPACK_IMPORTED_MODULE_0__["display"].height) {
           this.roadLinesVec[i].y = -this.lineHeight * 2;
         }
+      }
+    }
+  }, {
+    key: "createNpc",
+    value: function createNpc() {
+      for (var i = 0; i < this.carsData; i++) {
+        this.npc[i].push(new _Car__WEBPACK_IMPORTED_MODULE_1__["default"]());
       }
     }
   }, {

@@ -7,6 +7,7 @@ export default class Car {
             y: y
         },
         this.xDir = 0,
+        this.yDir = 0,
         this.width = width,
         this.height = height
     }
