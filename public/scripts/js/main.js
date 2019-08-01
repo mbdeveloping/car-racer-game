@@ -108,13 +108,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Car =
 /*#__PURE__*/
 function () {
-  function Car(x, y, width, height) {
+  function Car(x, y, width, height, color) {
     _classCallCheck(this, Car);
 
     this.pos = {
       x: x,
       y: y
-    }, this.xDir = 0, this.yDir = 0, this.width = width, this.height = height;
+    }, this.xDir = 0, this.yDir = 0, this.width = width, this.height = height, this.color = color;
   }
 
   _createClass(Car, [{
@@ -130,7 +130,7 @@ function () {
   }, {
     key: "show",
     value: function show() {
-      _index__WEBPACK_IMPORTED_MODULE_0__["display"].drawObject(this.pos.x, this.pos.y, this.width, this.height);
+      _index__WEBPACK_IMPORTED_MODULE_0__["display"].drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
     }
   }]);
 
@@ -212,8 +212,8 @@ function () {
     }
   }, {
     key: "drawObject",
-    value: function drawObject(x, y, w, h) {
-      this.context.fillStyle = 'red';
+    value: function drawObject(x, y, w, h, color) {
+      this.context.fillStyle = color;
       this.context.fillRect(x, y, w, h);
     }
   }]);
@@ -339,7 +339,25 @@ function () {
     }, {
       x: _index__WEBPACK_IMPORTED_MODULE_0__["display"].width / 2 - this.lineWidth / 2,
       y: 400
-    }], this.speed = 2, this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100), this.carsData = ["black", "green", "yellow"], this.npc = [];
+    }], this.speed = 2, this.playerCar = new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](20, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height - 120, 80, 100, 'black'), this.carsData = [{
+      "car": "black",
+      "pos": {
+        x: 170,
+        y: 0
+      }
+    }, {
+      "car": "green",
+      "pos": {
+        x: 20,
+        y: 0
+      }
+    }, {
+      "car": "yellow",
+      "pos": {
+        x: 40,
+        y: 0
+      }
+    }], this.npc = [], this.level = 1;
   }
 
   _createClass(World, [{
@@ -375,9 +393,19 @@ function () {
   }, {
     key: "createNpc",
     value: function createNpc() {
-      for (var i = 0; i < this.carsData; i++) {
-        this.npc[i].push(new _Car__WEBPACK_IMPORTED_MODULE_1__["default"]());
+      if (this.npc.length <= this.level) {
+        this.npc.push(new _Car__WEBPACK_IMPORTED_MODULE_1__["default"](this.carsData[0].pos.x, this.carsData[0].pos.y, 80, 100, "red"));
       }
+    }
+  }, {
+    key: "showNpc",
+    value: function showNpc() {
+      this.npc[0].show();
+    }
+  }, {
+    key: "moveNpc",
+    value: function moveNpc() {
+      this.npc[0].pos.y += this.speed * 0.5;
     }
   }, {
     key: "updateCarPos",
@@ -400,13 +428,16 @@ function () {
       this.restoreLines();
       this.updateCarPos();
       this.collideObject();
+      this.createNpc();
+      this.moveNpc();
     }
   }, {
     key: "show",
     value: function show() {
       this.createRoad(_index__WEBPACK_IMPORTED_MODULE_0__["display"].context, _index__WEBPACK_IMPORTED_MODULE_0__["display"].width, _index__WEBPACK_IMPORTED_MODULE_0__["display"].height, this.roadColor);
       this.createRoadLines(this.roadLinesVec);
-      this.playerCar.show(this.playerCar.pos.x, this.playerCar.pos.y, this.playerCar.width, this.playerCar.height);
+      this.playerCar.show();
+      this.showNpc();
     }
   }]);
 

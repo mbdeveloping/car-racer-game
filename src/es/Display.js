@@ -13,8 +13,8 @@ export default class Display {
         body.appendChild(this.canvas);
     }
 
-    drawObject(x,y,w,h) {
-        this.context.fillStyle = 'red';
+    drawObject(x,y,w,h, color) {
+        this.context.fillStyle = color;
         this.context.fillRect(x, y, w, h);
     }
 }

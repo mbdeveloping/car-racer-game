@@ -1,7 +1,7 @@
 import {display} from './index';
 
 export default class Car {
-    constructor(x,y,width, height) {
+    constructor(x,y,width, height, color) {
         this.pos = {
             x: x,
             y: y
@@ -9,7 +9,8 @@ export default class Car {
         this.xDir = 0,
         this.yDir = 0,
         this.width = width,
-        this.height = height
+        this.height = height,
+        this.color = color
     }
 
     moveCar(dir) {
@@ -21,6 +22,6 @@ export default class Car {
     }
 
     show() {
-        display.drawObject(this.pos.x, this.pos.y, this.width, this.height);
+        display.drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
     }
 }

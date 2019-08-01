@@ -27,11 +27,32 @@ export default class World {
             }
         ],
         this.speed = 2,
-        this.playerCar = new Car(20, display.height - 120, 80, 100),
+        this.playerCar = new Car(20, display.height - 120, 80, 100, 'black'),
         this.carsData = [
-            "black", "green", "yellow"
+            {
+                "car": "black",
+                "pos": {
+                    x: 170,
+                    y: 0
+                }
+            },
+            {
+                "car": "green",
+                "pos": {
+                    x: 20,
+                    y: 0
+                }
+            },
+            {
+                "car": "yellow",
+                "pos": {
+                    x: 40,
+                    y: 0
+                }
+            }
         ],
-        this.npc = []
+        this.npc = [],
+        this.level = 1
     }
 
     createRoad(ctx,w,h,color) {
@@ -61,9 +82,23 @@ export default class World {
     }
 
     createNpc() {
-        for (let i=0; i<this.carsData; i++) {
-            this.npc[i].push(new Car());
+        if (this.npc.length <= this.level) {
+            this.npc.push(new Car(
+                this.carsData[0].pos.x,
+                this.carsData[0].pos.y,
+                80,
+                100,
+                "red"
+            ));
         }
+    }
+
+    showNpc() {
+        this.npc[0].show();
+    }
+
+    moveNpc() {
+        this.npc[0].pos.y += this.speed * 0.5;
     }
 
     updateCarPos() {
@@ -83,11 +118,14 @@ export default class World {
         this.restoreLines();
         this.updateCarPos();
         this.collideObject();
+        this.createNpc();
+        this.moveNpc();
     }
 
     show() {
         this.createRoad(display.context, display.width, display.height, this.roadColor);
         this.createRoadLines(this.roadLinesVec);
-        this.playerCar.show(this.playerCar.pos.x, this.playerCar.pos.y, this.playerCar.width,this.playerCar.height);
+        this.playerCar.show();
+        this.showNpc();
     }
 }
