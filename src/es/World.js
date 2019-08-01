@@ -1,32 +1,10 @@
 import {display} from './index';
 import Car from './Car';
+import Road from './Road';
 
 export default class World {
     constructor() {
-        this.roadColor = 'rgb(77,84,92)',
-        this.linesColor = 'rgb(250, 250, 250)',
-        this.lineWidth = 10,
-        this.lineHeight = 100,
-        this.lines = [],
-        this.roadLinesVec = [
-            {
-                x: (display.width / 2) - (this.lineWidth / 2),
-                y: -200
-            },
-            {
-                x: (display.width / 2) - (this.lineWidth / 2),
-                y: 0
-            },
-            {
-                x: (display.width / 2) - (this.lineWidth / 2),
-                y: 200
-            },
-            {
-                x: (display.width / 2) - (this.lineWidth / 2),
-                y: 400
-            }
-        ],
-        this.speed = 5,
+        this.speed = 7,
         this.randomSpeed = Math.floor(Math.random() * 2) + 1,
         this.playerCar = new Car(80, display.height - 200, 60, 100, 'black'),
         this.carsData = [
@@ -53,33 +31,8 @@ export default class World {
             }
         ],
         this.npc = [],
-        this.level = 1
-    }
-
-    createRoad(ctx,w,h,color) {
-        ctx.fillStyle = color;
-        ctx.fillRect(0, 0, w, h);
-    }
-
-    createRoadLines(lines) {
-        for (let i=0; i<lines.length; i++) {
-            display.context.fillStyle = this.linesColor;
-            display.context.fillRect(this.roadLinesVec[i].x, this.roadLinesVec[i].y, this.lineWidth, this.lineHeight);
-        }
-    }
-
-    moveLines() {
-        for (let i=0; i < this.roadLinesVec.length; i++) {
-            this.roadLinesVec[i].y += this.speed;
-        }
-    }
-
-    restoreLines() {
-        for (let i=0; i < this.roadLinesVec.length; i++) {
-            if (this.roadLinesVec[i].y >= display.height) {
-                this.roadLinesVec[i].y = -this.lineHeight * 2;
-            }
-        }
+        this.level = 1,
+        this.road = new Road(display, this.speed);
     }
 
     createNpc() {
@@ -99,7 +52,7 @@ export default class World {
     }
 
     moveNpc() {
-        this.npc[0].pos.y += this.speed * this.randomSpeed;
+        this.npc[0].pos.y += this.speed * 0.5;
     }
 
     updateCarPos() {
@@ -115,8 +68,8 @@ export default class World {
     }
 
     update() {
-        this.moveLines();
-        this.restoreLines();
+        this.road.moveLines();
+        this.road.restoreLines();
         this.updateCarPos();
         this.collideObject();
         this.createNpc();
@@ -124,8 +77,8 @@ export default class World {
     }
 
     show() {
-        this.createRoad(display.context, display.width, display.height, this.roadColor);
-        this.createRoadLines(this.roadLinesVec);
+        this.road.createRoad();
+        this.road.createLines();
         this.playerCar.show();
         this.showNpc();
     }
