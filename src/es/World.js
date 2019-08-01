@@ -5,7 +5,7 @@ export default class World {
     constructor() {
         this.roadColor = 'rgb(77,84,92)',
         this.linesColor = 'rgb(250, 250, 250)',
-        this.lineWidth = 20,
+        this.lineWidth = 10,
         this.lineHeight = 100,
         this.lines = [],
         this.roadLinesVec = [
@@ -26,8 +26,9 @@ export default class World {
                 y: 400
             }
         ],
-        this.speed = 2,
-        this.playerCar = new Car(20, display.height - 120, 80, 100, 'black'),
+        this.speed = 5,
+        this.randomSpeed = Math.floor(Math.random() * 2) + 1,
+        this.playerCar = new Car(80, display.height - 200, 60, 100, 'black'),
         this.carsData = [
             {
                 "car": "black",
@@ -86,7 +87,7 @@ export default class World {
             this.npc.push(new Car(
                 this.carsData[0].pos.x,
                 this.carsData[0].pos.y,
-                80,
+                60,
                 100,
                 "red"
             ));
@@ -98,7 +99,7 @@ export default class World {
     }
 
     moveNpc() {
-        this.npc[0].pos.y += this.speed * 0.5;
+        this.npc[0].pos.y += this.speed * this.randomSpeed;
     }
 
     updateCarPos() {
