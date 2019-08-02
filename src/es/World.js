@@ -55,6 +55,12 @@ export default class World {
         this.npc[0].pos.y += this.speed * 0.5;
     }
 
+    restoreNpc() {
+        if (this.npc[0].pos.y >= display.height) {
+            this.npc[0].pos.y = -200;
+        }
+    }
+
     updateCarPos() {
         this.playerCar.pos.x += this.playerCar.xDir;
     }
@@ -74,6 +80,7 @@ export default class World {
         this.collideObject();
         this.createNpc();
         this.moveNpc();
+        this.restoreNpc();
     }
 
     show() {
