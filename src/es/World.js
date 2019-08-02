@@ -15,13 +15,16 @@ export default class World {
         ],
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
-        this.level = 1,
+        this.level = {
+            cars: 2,
+            // gameSpeed = 7
+        },
         this.road = new Road(display, this.speed),
         this.frameCounter = 0
     }
 
     createNpc() {
-        if (this.npc.length <= this.level) {
+        if (this.npc.length <= this.level.cars) {
             for (let i = 0; i < 2; i++) {
                 let random = Math.floor(Math.random() * this.spawnPos.length);
         
@@ -35,7 +38,6 @@ export default class World {
                         this.npcCars[Math.floor(Math.random() * this.npcCars.length)]
                     ));
                 } else {
-                    this.createNpc();
                 }
             }
         }
@@ -106,5 +108,6 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
+        console.log(this.npc);
     }
 }
