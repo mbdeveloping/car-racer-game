@@ -6,10 +6,11 @@ export default class Road {
         this.height = display.height,
         this.color = 'rgb(77,84,92)',
         this.line = {
-            x: (display.width / 2) - (10 / 2), //need removing hard coded 10/2
+            x: (display.width / 2) - (5), //need removing hard coded value (1/2 of width)
             y: [ -200, 0, 200, 400],
             width: 10,
             height: 100,
+            offsetX: 15,
             color: 'rgb(250, 250, 250)'
         },
         this.lines = 4
