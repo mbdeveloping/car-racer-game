@@ -5,12 +5,13 @@ import Road from './Road';
 export default class World {
     constructor() {
         this.speed = 7,
+        // this.randomAcceleration = 0.5,
         this.playerCar = new Car(80, display.height - 200, 60, 100, 'black'),
         this.spawnPos = [
-            {x: 0, y: -100},
-            {x: 70, y: -100},
-            {x: 170, y: -100},
-            {x: 240, y: -100}
+            {isUsed: false, x: 0, y: -100},
+            {isUsed: false, x: 70, y: -100},
+            {isUsed: false, x: 170, y: -100},
+            {isUsed: false, x: 240, y: -100}
         ],
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
@@ -22,13 +23,20 @@ export default class World {
     createNpc() {
         if (this.npc.length <= this.level) {
             for (let i = 0; i < 2; i++) {
-                this.npc.push(new Car(
-                    this.spawnPos[Math.floor(Math.random() * this.spawnPos.length)].x,
-                    this.spawnPos[0].y,
-                    60,
-                    100,
-                    this.npcCars[Math.floor(Math.random() * this.npcCars.length)]
-                ));
+                let random = Math.floor(Math.random() * this.spawnPos.length);
+        
+                if (this.spawnPos[random].isUsed !== true) {
+                    this.spawnPos[random].isUsed = true;
+                    this.npc.push(new Car(
+                        this.spawnPos[random].x,
+                        this.spawnPos[0].y,
+                        60,
+                        100,
+                        this.npcCars[Math.floor(Math.random() * this.npcCars.length)]
+                    ));
+                } else {
+                    this.createNpc();
+                }
             }
         }
     }
@@ -44,7 +52,10 @@ export default class World {
             this.npc[0].pos.y += this.speed * 0.5;
 
             if (this.frameCounter > 60) {
-                this.npc[1].pos.y += this.speed * 0.5;
+                if (this.npc[1].acc === 0) {
+                    this.npc[1].acc = Math.random().toFixed(1);
+                }
+                this.npc[1].pos.y += this.speed * this.npc[1].acc;
             }
         }
     }
@@ -54,6 +65,7 @@ export default class World {
             if (this.npc[i].pos.y >= display.height) {
                 this.npc[i].pos.y = this.spawnPos[0].y; //all has same spawn pos
                 this.npc[i].pos.x = this.spawnPos[Math.floor(Math.random() * this.spawnPos.length)].x;
+                this.npc[i].acc = 0; //restore acc
             }
 
             if (this.npc[1].pos.y >= display.height) {
