@@ -48,52 +48,6 @@ export default class World {
                     this.createNpc(counter + 1);
                 }
             }
-            
-
-            
-            
-
-            // if (this.spawnPos[randomPos].isUsed === false) {
-            //     this.spawnPos[randomPos].isUsed = true;
-            //     // this.spawnCounter = randomPos;
-
-            //     // console.log('if');
-            //     // console.log(randomPos);
-            //     // console.log(this.spawnCounter);
-
-            //     this.npc.push(new Car(
-            //         this.spawnPos[randomPos].x,
-            //         this.spawnPos[0].y,
-            //         60,
-            //         100,
-            //         this.npcCars[Math.floor(Math.random() * (this.npcCars.length - 1))],
-            //         this.spawnCounter
-            //     ));
-            // } else {
-            //     if (this.spawnCounter === this.spawnPos.length - 1) {
-            //         this.spawnCounter = 0;
-            //         console.log('l-1');
-            //     } else {
-            //         if (this.spawnPos[this.spawnCounter].isUsed === true) {
-            //             console.log('else else in');
-            //             this.spawnCounter += 1;
-            //         }
-
-            //         console.log('else else out');
-            //     }
-
-            //     this.spawnPos[this.spawnCounter].isUsed = true;
-            //     console.log(this.spawnCounter);
-
-            //     this.npc.push(new Car(
-            //         this.spawnPos[this.spawnCounter].x,
-            //         this.spawnPos[0].y,
-            //         60,
-            //         100,
-            //         this.npcCars[Math.floor(Math.random() * (this.npcCars.length - 1))],
-            //         this.spawnCounter
-            //     ));
-            // }
         }
     }
 
@@ -104,17 +58,6 @@ export default class World {
     }
 
     moveNpc() {
-        // this.npc[0].pos.y += this.levelData[this.level].speed * 0.5;
-
-        // if (this.npc.length > 1) {
-        //     if (this.frameCounter > 0) {
-        //         if (this.npc[1].acc === 0) {
-        //             this.npc[1].acc = Math.random().toFixed(1);
-        //         }
-        //         this.npc[1].pos.y += this.levelData[this.level].speed * this.npc[1].acc;
-        //     }
-        // }
-
         for (let i = 0; i < this.npc.length; i++) {
             
             if (this.npc[i].acc === 0 || this.npc[i].acc === '0.0') {
@@ -127,10 +70,6 @@ export default class World {
     restoreNpc() {
         for (let i = 0; i < this.npc.length; i++) {
             if (this.npc[i].pos.y >= display.height) {
-                // this.npc[i].pos.y = this.spawnPos[0].y; //all has same spawn pos
-                // this.npc[i].pos.x = this.spawnPos[Math.floor(Math.random() * (this.spawnPos.length - 1))].x;
-                // this.npc[i].acc = 0; //restore acc
-                // console.log(this.npc);
                 this.spawnPos[this.npc[i].spawnPos].isUsed = false;
                 this.npc.splice(i, 1);
             }
@@ -169,7 +108,5 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
-        // console.log(this.npc);
-        // console.log(this.frameCounter);
     }
 }
