@@ -28,9 +28,6 @@ export default class World {
         if (this.npc.length < this.levelData[this.level].cars) {
             let randomPos = Math.floor(Math.random() * (this.spawnPos.length));
 
-            // console.log(this.spawnPos);
-            // console.log(this.npc);
-
             if (!this.spawnPos[randomPos].isUsed) {
                 this.spawnPos[randomPos].isUsed = true;
                 this.spawnCounter = randomPos;
