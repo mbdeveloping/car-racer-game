@@ -79,7 +79,7 @@ export default class World {
 
         for (let i = 0; i < this.npc.length; i++) {
             
-            if (this.npc[i].acc === 0) {
+            if (this.npc[i].acc === 0 || this.npc[i].acc === '0.0') {
                 this.npc[i].acc = Math.random().toFixed(1);
             }
             this.npc[i].pos.y += this.levelData[this.level].speed * this.npc[i].acc;;
@@ -130,7 +130,7 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
-        // console.log(this.npc[1].acc);
+        console.log(this.npc);
         // console.log(this.frameCounter);
     }
 }

@@ -1,7 +1,7 @@
 import {display} from './index';
 
 export default class Car {
-    constructor(x, y, width, height, color, spawnPos = null) {
+    constructor(x, y, width, height, color = 'brown', spawnPos = null) {
         this.pos = {
             x: x,
             y: y
