@@ -1,11 +1,12 @@
 import {display} from './index';
 
 export default class Car {
-    constructor(x,y,width, height, color) {
+    constructor(x, y, width, height, color, spawnPos = null) {
         this.pos = {
             x: x,
             y: y
         },
+        this.spawnPos = spawnPos,
         this.xDir = 0,
         this.yDir = 0,
         this.width = width,

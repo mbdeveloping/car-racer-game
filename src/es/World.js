@@ -4,7 +4,6 @@ import Road from './Road';
 
 export default class World {
     constructor() {
-        this.speed = 7,
         // this.randomAcceleration = 0.5,
         this.playerCar = new Car(80, display.height - 200, 60, 100, 'black'),
         this.spawnPos = [
@@ -16,16 +15,20 @@ export default class World {
         this.spawnCounter = 0,
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
-        this.level = [
-            {cars: 2}
+        this.levelData = [
+            {cars: 2, speed: 7}
         ],
-        this.road = new Road(display, this.speed),
+        this.level = 0,
+        this.road = new Road(display, this.levelData[this.level].speed),
         this.frameCounter = 0
     }
 
     createNpc() {
-        if (this.npc.length < this.level[0].cars) {
+        if (this.npc.length < this.levelData[this.level].cars) {
             let randomPos = Math.floor(Math.random() * (this.spawnPos.length));
+
+            // console.log(this.spawnPos);
+            // console.log(this.npc);
 
             if (!this.spawnPos[randomPos].isUsed) {
                 this.spawnPos[randomPos].isUsed = true;
@@ -36,7 +39,8 @@ export default class World {
                     this.spawnPos[0].y,
                     60,
                     100,
-                    this.npcCars[Math.floor(Math.random() * (this.npcCars.length - 1))]
+                    this.npcCars[Math.floor(Math.random() * (this.npcCars.length - 1))],
+                    this.spawnCounter
                 ));
             } else {
                 if (this.spawnCounter === this.spawnPos.length - 1) {
@@ -50,7 +54,8 @@ export default class World {
                     this.spawnPos[0].y,
                     60,
                     100,
-                    this.npcCars[Math.floor(Math.random() * (this.npcCars.length - 1))]
+                    this.npcCars[Math.floor(Math.random() * (this.npcCars.length - 1))],
+                    this.spawnCounter
                 ));
             }
         }
@@ -63,34 +68,31 @@ export default class World {
     }
 
     moveNpc() {
-        this.npc[0].pos.y += this.speed * 0.5;
+        this.npc[0].pos.y += this.levelData[this.level].speed * 0.5;
 
-        if (this.frameCounter > 0) {
-            if (this.npc[1].acc === 0) {
-                this.npc[1].acc = Math.random().toFixed(1);
+        if (this.npc.length > 1) {
+            if (this.frameCounter > 0) {
+                if (this.npc[1].acc === 0) {
+                    this.npc[1].acc = Math.random().toFixed(1);
+                }
+                this.npc[1].pos.y += this.levelData[this.level].speed * this.npc[1].acc;
             }
-            this.npc[1].pos.y += this.speed * this.npc[1].acc;
         }
-
-        // for (let i = 0; i < this.npc.length; i++) {
-        //     this.npc[i].show();
-        // }
     }
 
     restoreNpc() {
         for (let i = 0; i < this.npc.length; i++) {
             if (this.npc[i].pos.y >= display.height) {
-                this.npc[i].pos.y = this.spawnPos[0].y; //all has same spawn pos
-                this.npc[i].pos.x = this.spawnPos[Math.floor(Math.random() * (this.spawnPos.length - 1))].x;
-                this.npc[i].acc = 0; //restore acc
+                // this.npc[i].pos.y = this.spawnPos[0].y; //all has same spawn pos
+                // this.npc[i].pos.x = this.spawnPos[Math.floor(Math.random() * (this.spawnPos.length - 1))].x;
+                // this.npc[i].acc = 0; //restore acc
+                this.spawnPos[this.npc[i].spawnPos].isUsed = false;
+                this.npc.splice(i, 1);
             }
         }
-        // if (this.npc[1].pos.y >= display.height) {
-        //     this.frameCounter = 0;
-        // }
     }
 
-    updateCarPos() {
+    updatePlayerPos() {
         this.playerCar.pos.x += this.playerCar.xDir;
     }
 
@@ -109,7 +111,7 @@ export default class World {
     update() {
         this.road.moveLines();
         this.road.restoreLines();
-        this.updateCarPos();
+        this.updatePlayerPos();
         this.collideObject();
         this.createNpc();
         this.moveNpc();
