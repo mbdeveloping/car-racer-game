@@ -1,5 +1,6 @@
 import {display} from './index';
 import Car from './Car';
+import Npc from './Npc';
 import Road from './Road';
 
 export default class World {
@@ -68,15 +69,23 @@ export default class World {
     }
 
     moveNpc() {
-        this.npc[0].pos.y += this.levelData[this.level].speed * 0.5;
+        // this.npc[0].pos.y += this.levelData[this.level].speed * 0.5;
 
-        if (this.npc.length > 1) {
-            if (this.frameCounter > 0) {
-                if (this.npc[1].acc === 0) {
-                    this.npc[1].acc = Math.random().toFixed(1);
-                }
-                this.npc[1].pos.y += this.levelData[this.level].speed * this.npc[1].acc;
+        // if (this.npc.length > 1) {
+        //     if (this.frameCounter > 0) {
+        //         if (this.npc[1].acc === 0) {
+        //             this.npc[1].acc = Math.random().toFixed(1);
+        //         }
+        //         this.npc[1].pos.y += this.levelData[this.level].speed * this.npc[1].acc;
+        //     }
+        // }
+
+        for (let i = 0; i < this.npc.length; i++) {
+            
+            if (this.npc[i].acc === 0) {
+                this.npc[i].acc = Math.random().toFixed(1);
             }
+            this.npc[i].pos.y += this.levelData[this.level].speed * this.npc[i].acc;;
         }
     }
 
@@ -124,7 +133,7 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
-        // console.log(this.npc);
+        // console.log(this.npc[1].acc);
         // console.log(this.frameCounter);
     }
 }
