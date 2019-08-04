@@ -38,7 +38,7 @@ export default class World {
                     this.spawnPos[0].y,
                     60,
                     100,
-                    this.npcCars[Math.floor(Math.random() * (this.npcCars.length - 1))],
+                    this.npcCars[Math.floor(Math.random() * (this.npcCars.length))],
                     counter
                 ));
             } else {
