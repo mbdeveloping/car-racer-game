@@ -4,7 +4,7 @@ import Npc from './Npc';
 import Road from './Road';
 
 export default class World {
-    constructor() {
+    constructor(level) {
         // this.randomAcceleration = 0.5,
         this.playerCar = new Car(80, display.height - 200, 60, 100, 'black'),
         this.spawnPos = [
@@ -18,9 +18,9 @@ export default class World {
         this.npc = [],
         this.levelData = [
             {cars: 2, speed: 7},
-            {cars: 1, speed: 7}
+            {cars: 3, speed: 7}
         ],
-        this.level = 1,
+        this.level = level - 1,
         this.road = new Road(display, this.levelData[this.level].speed)
     }
 
