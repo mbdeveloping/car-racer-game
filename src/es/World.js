@@ -3,8 +3,7 @@ import Car from './Car';
 import Road from './Road';
 
 export default class World {
-    constructor(level) {
-        // this.randomAcceleration = 0.5,
+    constructor() {
         this.playerCar = new Car(80, display.height - 200, 60, 100, 'black'),
         this.spawnPos = [
             {isUsed: false, x: 0, y: -100},
@@ -18,15 +17,15 @@ export default class World {
         this.levelData = [
             {cars: 2, speed: 7},
             {cars: 3, speed: 7},
-            {cars: 3, speed: 10}
+            {cars: 3, speed: 9}
         ],
-        this.level = level - 1,
-        this.road = new Road(display, this.levelData[this.level].speed),
+        this.level = 1,
+        this.road = new Road(display, this.levelData[this.level - 1].speed),
         this.frame
     }
 
     createNpc(counter) {
-        if (this.npc.length < this.levelData[this.level].cars) {
+        if (this.npc.length < this.levelData[this.level - 1].cars) {
             counter = Math.floor(Math.random() * (this.spawnPos.length));
 
             if (this.spawnPos[counter].isUsed === false) {
@@ -60,7 +59,7 @@ export default class World {
         for (let i = 0; i < this.npc.length; i++) {
             
             if (this.npc[i].yDir === 0 || this.npc[i].yDir === '0.0') {
-                this.npc[i].yDir = Math.random().toFixed(1);
+                this.npc[i].yDir = Math.random().toFixed(1) * (1 - 0.5) + 0.5;
             }
             this.npc[i].pos.y += this.levelData[this.level].speed * this.npc[i].yDir;
         }
