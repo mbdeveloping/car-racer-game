@@ -58,10 +58,10 @@ export default class World {
     moveNpc() {
         for (let i = 0; i < this.npc.length; i++) {
             
-            if (this.npc[i].acc === 0 || this.npc[i].acc === '0.0') {
-                this.npc[i].acc = Math.random().toFixed(1);
+            if (this.npc[i].yDir === 0 || this.npc[i].yDir === '0.0') {
+                this.npc[i].yDir = Math.random().toFixed(1);
             }
-            this.npc[i].pos.y += this.levelData[this.level].speed * this.npc[i].acc;;
+            this.npc[i].pos.y += this.levelData[this.level].speed * this.npc[i].yDir;
         }
     }
 

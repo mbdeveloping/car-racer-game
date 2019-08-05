@@ -11,8 +11,7 @@ export default class Car {
         this.yDir = 0,
         this.width = width,
         this.height = height,
-        this.color = color,
-        this.acc = 0
+        this.color = color
     }
 
     moveCar(dir) {
