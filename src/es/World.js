@@ -21,8 +21,7 @@ export default class World {
             {cars: 3, speed: 7}
         ],
         this.level = 1,
-        this.road = new Road(display, this.levelData[this.level].speed),
-        this.frameCounter = 0
+        this.road = new Road(display, this.levelData[this.level].speed)
     }
 
     createNpc(counter) {
@@ -80,15 +79,14 @@ export default class World {
     }
 
     collideObject() {
+        //with world walls
         if (this.playerCar.pos.x < 0) {
             this.playerCar.pos.x = 0;
         } else if (this.playerCar.pos.x + this.playerCar.width >= display.width) {
             this.playerCar.pos.x = display.width - this.playerCar.width;
         }
-    }
 
-    countFrame() {
-        this.frameCounter++;
+        //with other objects
     }
 
     update() {
@@ -99,7 +97,6 @@ export default class World {
         this.createNpc(this.spawnCounter);
         this.moveNpc();
         this.restoreNpc();
-        this.countFrame();
     }
 
     show() {
