@@ -18,7 +18,7 @@ export default class World {
         this.npc = [],
         this.levelData = [
             {cars: 2, speed: 7},
-            {cars: 3, speed: 7}
+            {cars: 1, speed: 7}
         ],
         this.level = 1,
         this.road = new Road(display, this.levelData[this.level].speed)
@@ -93,7 +93,7 @@ export default class World {
                 // console.log('X colliding!');
             } 
             //y collide
-            else if (this.playerCar.pos.y < this.npc[i].pos.y + this.npc[i].height && this.playerCar.pos.y + this.playerCar.height < this.npc[i].pos.y) {
+            else if (this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height) {
                 console.log('y colliding');
             }
         }
