@@ -87,6 +87,16 @@ export default class World {
         }
 
         //with other objects
+        for (let i = 0; i < this.npc.length; i++) {
+            //x collide
+            if (this.playerCar.pos.x + this.playerCar.width >= this.npc[i].pos.x && this.playerCar.pos.x < this.npc[i].pos.x + this.npc[i].width) {
+                console.log('X colliding!');
+            } 
+            //y collide
+            else if (this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height && this.playerCar.pos.y + this.playerCar.height <= this.npc[i].pos.y + this.npc[i].height) {
+                console.log('y colliding');
+            }
+        }
     }
 
     update() {
