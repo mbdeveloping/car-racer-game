@@ -5,6 +5,7 @@ import Controller from './Controller';
 
 export const display = new Display();
 export const game = new Game();
+let gameStarted = false;
 // export const controller = new Controller();
 
 function setup() {
@@ -16,6 +17,15 @@ function setup() {
     display.context.fillStyle = 'white';
     display.context.font = "20px Arial";
     display.context.fillText("Press Enter to start", 60, display.height / 2);
+}
+
+function init() {
+    if (gameStarted === false) {
+        gameStarted = true;
+        start();
+        game.player.scoreEl.style = 'opacity: 1';
+    }
+    
 }
 
 export function start() {
@@ -31,7 +41,7 @@ function movementController() {
 
     window.addEventListener('keydown', (e) => {
         switch(e.keyCode) {
-            case 13: start(); break;
+            case 13: init(); break;
             case 65: game.world.playerCar.moveCar(-1); a = true; break;
             case 68: game.world.playerCar.moveCar(1); d = true; break;
         }

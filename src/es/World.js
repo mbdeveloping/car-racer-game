@@ -1,6 +1,5 @@
 import {display} from './index';
 import Car from './Car';
-import Npc from './Npc';
 import Road from './Road';
 
 export default class World {
@@ -17,12 +16,13 @@ export default class World {
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
         this.levelData = [
-            {cars: 1, speed: 7},
             {cars: 2, speed: 7},
-            {cars: 3, speed: 7}
+            {cars: 3, speed: 7},
+            {cars: 3, speed: 10}
         ],
         this.level = level - 1,
-        this.road = new Road(display, this.levelData[this.level].speed)
+        this.road = new Road(display, this.levelData[this.level].speed),
+        this.frame
     }
 
     createNpc(counter) {
@@ -93,8 +93,8 @@ export default class World {
                 && this.playerCar.pos.x < this.npc[i].pos.x + this.npc[i].width 
                 && this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height
                 && this.npc[i].pos.y <= this.playerCar.pos.y + this.playerCar.height) {
-                console.log('colliding!');
-            }
+                console.log('colliding');
+            } 
         }
     }
 
