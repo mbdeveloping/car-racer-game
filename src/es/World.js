@@ -17,6 +17,7 @@ export default class World {
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
         this.levelData = [
+            {cars: 1, speed: 7},
             {cars: 2, speed: 7},
             {cars: 3, speed: 7}
         ],
@@ -88,13 +89,11 @@ export default class World {
 
         //with other objects
         for (let i = 0; i < this.npc.length; i++) {
-            //x collide
-            if (this.playerCar.pos.x + this.playerCar.width >= this.npc[i].pos.x && this.playerCar.pos.x < this.npc[i].pos.x + this.npc[i].width) {
-                // console.log('X colliding!');
-            } 
-            //y collide
-            else if (this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height) {
-                console.log('y colliding');
+            if (this.playerCar.pos.x + this.playerCar.width >= this.npc[i].pos.x 
+                && this.playerCar.pos.x < this.npc[i].pos.x + this.npc[i].width 
+                && this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height
+                && this.npc[i].pos.y <= this.playerCar.pos.y + this.playerCar.height) {
+                console.log('colliding!');
             }
         }
     }

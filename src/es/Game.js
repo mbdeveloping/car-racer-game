@@ -4,7 +4,7 @@ import Player from './Player';
 
 export default class Game {
     constructor() {
-        this.level = 2,
+        this.level = 1,
         this.world = new World(this.level),
         this.player = new Player()
     }
