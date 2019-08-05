@@ -27,14 +27,13 @@ export default class World {
 
     createNpc(counter) {
         if (this.npc.length < this.levelData[this.level].cars) {
-            let randomPos = Math.floor(Math.random() * (this.spawnPos.length));
-            counter = randomPos;
+            counter = Math.floor(Math.random() * (this.spawnPos.length));
 
             if (this.spawnPos[counter].isUsed === false) {
-                this.spawnPos[randomPos].isUsed = true;
+                this.spawnPos[counter].isUsed = true;
 
                 this.npc.push(new Car(
-                    this.spawnPos[randomPos].x,
+                    this.spawnPos[counter].x,
                     this.spawnPos[0].y,
                     60,
                     100,
