@@ -16,8 +16,9 @@ export default class World {
         this.npc = [],
         this.levelData = [
             {cars: 2, speed: 7},
-            {cars: 3, speed: 7},
-            {cars: 3, speed: 9}
+            {cars: 3, speed: 12},
+            {cars: 3, speed: 17},
+            {cars: 2, speed: 25}
         ],
         this.level = 1,
         this.road = new Road(display, this.levelData[this.level - 1].speed),
@@ -61,7 +62,7 @@ export default class World {
             if (this.npc[i].yDir === 0 || this.npc[i].yDir === '0.0') {
                 this.npc[i].yDir = Math.random().toFixed(1) * (1 - 0.5) + 0.5;
             }
-            this.npc[i].pos.y += this.levelData[this.level].speed * this.npc[i].yDir;
+            this.npc[i].pos.y += this.levelData[this.level - 1].speed * this.npc[i].yDir;
         }
     }
 
@@ -92,7 +93,8 @@ export default class World {
                 && this.playerCar.pos.x < this.npc[i].pos.x + this.npc[i].width 
                 && this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height
                 && this.npc[i].pos.y <= this.playerCar.pos.y + this.playerCar.height) {
-                console.log('colliding');
+                // console.log('colliding');
+                this.playerCar.color = 'white';
             } 
         }
     }
@@ -112,5 +114,6 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
+        console.log(this.level);
     }
 }
