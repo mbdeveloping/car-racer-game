@@ -15,13 +15,13 @@ export default class World {
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
         this.levelData = [
-            {cars: 2, speed: 7},
-            {cars: 3, speed: 12},
-            {cars: 3, speed: 17},
-            {cars: 2, speed: 25}
+            {cars: 2, speed: 7, playerSpeed: 7},
+            {cars: 3, speed: 7, playerSpeed: 10},
+            {cars: 3, speed: 7, playerSpeed: 13},
+            {cars: 2, speed: 10, playerSpeed: 17}
         ],
         this.level = 1,
-        this.road = new Road(display, this.levelData[this.level - 1].speed),
+        this.road = new Road(display),
         this.frame
     }
 
@@ -79,6 +79,10 @@ export default class World {
         this.playerCar.pos.x += this.playerCar.xDir;
     }
 
+    updatePlayerSpeed() {
+        this.road.speed = this.levelData[this.level - 1].playerSpeed;
+    }
+
     collideObject() {
         //with world walls
         if (this.playerCar.pos.x < 0) {
@@ -103,6 +107,7 @@ export default class World {
         this.road.moveLines();
         this.road.restoreLines();
         this.updatePlayerPos();
+        this.updatePlayerSpeed();
         this.collideObject();
         this.createNpc(this.spawnCounter);
         this.moveNpc();

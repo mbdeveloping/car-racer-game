@@ -1,7 +1,7 @@
 export default class Road {
-    constructor(display, speed) {
+    constructor(display) {
         this.display = display,
-        this.speed = speed,
+        this.speed = 0,
         this.width = 300,
         this.height = display.height,
         this.color = 'rgb(77,84,92)',
