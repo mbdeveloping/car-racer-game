@@ -16,10 +16,11 @@ export default class World {
         this.npc = [],
         this.levelData = [
             {cars: 2, speed: 7, playerSpeed: 7},
-            {cars: 3, speed: 7, playerSpeed: 10},
+            {cars: 2, speed: 7, playerSpeed: 10},
             {cars: 3, speed: 7, playerSpeed: 13},
-            {cars: 2, speed: 10, playerSpeed: 17}
+            {cars: 2, speed: 9, playerSpeed: 16}
         ],
+        this.carsShowing = 1,
         this.level = 1,
         this.road = new Road(display),
         this.frame
@@ -97,7 +98,6 @@ export default class World {
                 && this.playerCar.pos.x < this.npc[i].pos.x + this.npc[i].width 
                 && this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height
                 && this.npc[i].pos.y <= this.playerCar.pos.y + this.playerCar.height) {
-                // console.log('colliding');
                 this.playerCar.color = 'white';
             } 
         }
