@@ -4,13 +4,14 @@ import Road from './Road';
 
 export default class World {
     constructor() {
-        this.playerCar = new Car(80, display.height - 200, 60, 100, 'black'),
         this.spawnPos = [
             {isUsed: false, x: 0, y: -100},
             {isUsed: false, x: 70, y: -100},
             {isUsed: false, x: 170, y: -100},
             {isUsed: false, x: 240, y: -100}
         ],
+        this.playerCar = new Car(this.spawnPos[0].x, display.height - 200, 60, 100, 'black'),
+        this.playerMoveCounter = 0,
         this.spawnCounter = 0,
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
@@ -18,8 +19,9 @@ export default class World {
             {cars: 2, speed: 7, playerSpeed: 7},
             {cars: 2, speed: 7, playerSpeed: 10},
             {cars: 3, speed: 7, playerSpeed: 13},
-            {cars: 2, speed: 9, playerSpeed: 16}
-        ],
+            {cars: 2, speed: 9, playerSpeed: 16},
+            {cars: 2, speed: 12, playerSpeed: 20}
+        ],  
         this.carsShowing = 1,
         this.level = 1,
         this.road = new Road(display),
@@ -51,6 +53,7 @@ export default class World {
         }
     }
 
+
     showNpc() {
         for (let i = 0; i < this.npc.length; i++) {
             this.npc[i].show();
@@ -58,6 +61,7 @@ export default class World {
     }
 
     moveNpc() {
+        
         for (let i = 0; i < this.npc.length; i++) {
             
             if (this.npc[i].yDir === 0 || this.npc[i].yDir === '0.0') {
@@ -78,6 +82,10 @@ export default class World {
 
     updatePlayerPos() {
         this.playerCar.pos.x += this.playerCar.xDir;
+
+        if (this.playerCar.pos.x >= this.spawnPos[this.playerMoveCounter].x) {
+            this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
+        }
     }
 
     updatePlayerSpeed() {
@@ -119,6 +127,7 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
-        console.log(this.level);
+        // console.log(this.npc);
+        console.log(this.playerMoveCounter);
     }
 }

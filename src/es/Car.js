@@ -1,4 +1,4 @@
-import {display} from './index';
+import {display, game} from './index';
 
 export default class Car {
     constructor(x, y, width, height, color = 'brown', spawnPos = null) {
@@ -16,7 +16,11 @@ export default class Car {
     }
 
     moveCar(dir) {
-        this.xDir = dir * 7;
+        
+        if (game.world.playerMoveCounter < game.world.spawnPos.length - 1) {
+            game.world.playerMoveCounter += dir;
+        }
+        this.xDir = dir * 10;
     }
 
     stopCar() {
