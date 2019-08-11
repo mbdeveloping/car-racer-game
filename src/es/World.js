@@ -82,9 +82,18 @@ export default class World {
 
     updatePlayerPos() {
         this.playerCar.pos.x += this.playerCar.xDir;
+        
 
-        if (this.playerCar.pos.x >= this.spawnPos[this.playerMoveCounter].x) {
-            this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
+        if (this.playerCar.xDir > 0) {
+            if (this.playerCar.pos.x > this.spawnPos[this.playerMoveCounter].x) {
+                // console.log('right in');
+                this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
+            }
+        } else {
+            // console.log('moving left');
+            if (this.playerCar.pos.x <= this.spawnPos[this.playerMoveCounter].x) {
+                this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
+            }
         }
     }
 
@@ -127,7 +136,7 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
-        // console.log(this.npc);
+
         console.log(this.playerMoveCounter);
     }
 }

@@ -4,7 +4,7 @@ export default class Car {
     constructor(x, y, width, height, color = 'brown', spawnPos = null) {
         this.pos = {
             x: x,
-            y: y
+            y: y    
         },
         this.spawnPos = spawnPos,
         this.xDir = 0,
@@ -16,9 +16,15 @@ export default class Car {
     }
 
     moveCar(dir) {
-        
-        if (game.world.playerMoveCounter < game.world.spawnPos.length - 1) {
-            game.world.playerMoveCounter += dir;
+        if (dir === -1) { //left
+            if (game.world.playerMoveCounter > 0) {
+                game.world.playerMoveCounter += dir;
+            }
+        }
+        else if (dir === 1) { //right
+            if (game.world.playerMoveCounter < game.world.spawnPos.length - 1) {
+                game.world.playerMoveCounter += dir;
+            }
         }
         this.xDir = dir * 10;
     }
