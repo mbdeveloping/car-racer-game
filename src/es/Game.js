@@ -21,6 +21,12 @@ export default class Game {
         if (this.player.score > 1500) {
             this.world.level = 5;
         }
+        if (this.player.score > 2000) {
+            this.world.level = 6;
+        }
+        if (this.player.score > 2500) {
+            this.world.level = 7;
+        }
 
         // if (this.player.score > 200) {
         //     this.world.level = 4;

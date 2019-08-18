@@ -20,7 +20,9 @@ export default class World {
             {cars: 2, speed: 3, playerSpeed: 15},
             {cars: 2, speed: 5, playerSpeed: 20},
             {cars: 3, speed: 5, playerSpeed: 25},
-            {cars: 3, speed: 7, playerSpeed: 30}
+            {cars: 3, speed: 7, playerSpeed: 30},
+            {cars: 3, speed: 10, playerSpeed: 30},
+            {cars: 3, speed: 13, playerSpeed: 35}
         ],  
         this.carsShowing = 1,
         this.level = 1,
