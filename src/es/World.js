@@ -16,11 +16,11 @@ export default class World {
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
         this.levelData = [
-            {cars: 2, speed: 7, playerSpeed: 7},
-            {cars: 2, speed: 7, playerSpeed: 10},
-            {cars: 3, speed: 7, playerSpeed: 13},
-            {cars: 2, speed: 9, playerSpeed: 16},
-            {cars: 2, speed: 12, playerSpeed: 20}
+            {cars: 1, speed: 2, playerSpeed: 10},
+            {cars: 2, speed: 3, playerSpeed: 15},
+            {cars: 2, speed: 5, playerSpeed: 20},
+            {cars: 3, speed: 7, playerSpeed: 25},
+            {cars: 3, speed: 9, playerSpeed: 30}
         ],  
         this.carsShowing = 1,
         this.level = 1,
@@ -69,6 +69,13 @@ export default class World {
             }
             this.npc[i].pos.y += this.levelData[this.level - 1].speed * this.npc[i].yDir;
         }
+
+
+        // this.npc[0].pos.y += this.levelData[this.level - 1].speed;
+
+        // if (this.npc[0].pos.y >= display.height / 2) {
+        //     this.npc[1].pos.y += this.levelData[this.level - 1].speed;
+        // }
     }
 
     restoreNpc() {
@@ -137,6 +144,7 @@ export default class World {
         this.playerCar.show();
         this.showNpc();
 
-        console.log(this.playerMoveCounter);
+        console.log(this.npc.indexOf(this.npc[0]), this.npc[0].color);
+        // console.log(this.npc.length);
     }
 }

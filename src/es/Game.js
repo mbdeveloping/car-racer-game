@@ -9,16 +9,16 @@ export default class Game {
     }
 
     updateLevel() {
-        if (this.player.score > 500) {
+        if (this.player.score > 200) {
             this.world.level = 2;
         }
-         if (this.player.score > 1000) {
+         if (this.player.score > 500) {
             this.world.level = 3;
         }
-         if (this.player.score > 1500) {
+         if (this.player.score > 1000) {
             this.world.level = 4;
         }
-        if (this.player.score > 2000) {
+        if (this.player.score > 1500) {
             this.world.level = 5;
         }
     }
