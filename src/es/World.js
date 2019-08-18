@@ -16,11 +16,11 @@ export default class World {
         this.npcCars = ["red", "green", "yellow"],
         this.npc = [],
         this.levelData = [
-            {cars: 1, speed: 2, playerSpeed: 10},
+            {cars: 2, speed: 2, playerSpeed: 10},
             {cars: 2, speed: 3, playerSpeed: 15},
             {cars: 2, speed: 5, playerSpeed: 20},
-            {cars: 3, speed: 7, playerSpeed: 25},
-            {cars: 3, speed: 9, playerSpeed: 30}
+            {cars: 3, speed: 5, playerSpeed: 25},
+            {cars: 3, speed: 7, playerSpeed: 30}
         ],  
         this.carsShowing = 1,
         this.level = 1,
@@ -62,20 +62,36 @@ export default class World {
 
     moveNpc() {
         
+        // for (let i = 0; i < this.npc.length; i++) {
+            
+        //     if (this.npc[i].yDir === 0 || this.npc[i].yDir === '0.0') {
+        //         this.npc[i].yDir = Math.random().toFixed(1) * (1 - 0.5) + 0.5;
+        //     }
+
+        //     this.npc[i].pos.y += this.levelData[this.level - 1].speed * this.npc[i].yDir;
+
+        //     if (this.level === 4) {
+        //     }
+        // }
+
         for (let i = 0; i < this.npc.length; i++) {
             
             if (this.npc[i].yDir === 0 || this.npc[i].yDir === '0.0') {
                 this.npc[i].yDir = Math.random().toFixed(1) * (1 - 0.5) + 0.5;
             }
-            this.npc[i].pos.y += this.levelData[this.level - 1].speed * this.npc[i].yDir;
         }
 
+        this.npc[0].pos.y += this.levelData[this.level - 1].speed * this.npc[0].yDir;
 
-        // this.npc[0].pos.y += this.levelData[this.level - 1].speed;
+        if (this.npc[0].pos.y >= 100) {
+            this.npc[1].pos.y += this.levelData[this.level - 1].speed * this.npc[1].yDir;
+        }
 
-        // if (this.npc[0].pos.y >= display.height / 2) {
-        //     this.npc[1].pos.y += this.levelData[this.level - 1].speed;
-        // }
+        if (this.level >= 4) {
+            if (this.npc[0].pos.y >= 200 && this.npc[1].pos.y >= 200) {
+                this.npc[2].pos.y += this.levelData[this.level - 1].speed * this.npc[2].yDir;
+            }
+        }
     }
 
     restoreNpc() {
@@ -116,13 +132,15 @@ export default class World {
             this.playerCar.pos.x = display.width - this.playerCar.width;
         }
 
-        //with other objects
+        //with npc
         for (let i = 0; i < this.npc.length; i++) {
             if (this.playerCar.pos.x + this.playerCar.width >= this.npc[i].pos.x 
                 && this.playerCar.pos.x < this.npc[i].pos.x + this.npc[i].width 
                 && this.playerCar.pos.y <= this.npc[i].pos.y + this.npc[i].height
                 && this.npc[i].pos.y <= this.playerCar.pos.y + this.playerCar.height) {
                 this.playerCar.color = 'white';
+                this.road.speed = 0;
+                this.npc[i].pos.y -= this.levelData[this.level - 1].speed * this.npc[i].yDir;
             } 
         }
     }
@@ -143,8 +161,5 @@ export default class World {
         this.road.createLines();
         this.playerCar.show();
         this.showNpc();
-
-        console.log(this.npc.indexOf(this.npc[0]), this.npc[0].color);
-        // console.log(this.npc.length);
     }
 }
