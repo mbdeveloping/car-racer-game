@@ -1,10 +1,9 @@
 export default class Display {
-    constructor(image) {
+    constructor() {
         this.canvas = document.createElement('canvas'),
         this.width = 300,
         this.height = 600,
-        this.context = this.canvas.getContext('2d'),
-        this.image = image
+        this.context = this.canvas.getContext('2d')
     }
 
     createCanvas(w,h) {
@@ -19,7 +18,7 @@ export default class Display {
         this.context.fillRect(x, y, w, h);
     }
 
-    drawImg(sx,sy,x,y,w,h) {
-        this.context.drawImage(this.image, sx, sy, x, y, w, h);
+    drawImg(image,sx,sy,sw,sh,x,y,w,h) {
+        this.context.drawImage(image, sx, sy, sw, sh, x, y, w, h);
     }
 }

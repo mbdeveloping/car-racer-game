@@ -1,4 +1,3 @@
-import cars from '../cars.png';
 import {display} from './index';
 import Car from './Car';
 import Road from './Road';

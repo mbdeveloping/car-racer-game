@@ -1,3 +1,5 @@
+import cars from '../cars.png';
+import carsData from './carsData';
 import {display, game} from './index';
 
 export default class Car {
@@ -13,7 +15,9 @@ export default class Car {
         this.height = height,
         this.color = color,
         this.img = new Image(),
-        this.img.src = cars
+        this.img.src = cars,
+        this.carsData = carsData,
+        this.currentFrame = this.carsData.playerForward
     }
 
     moveCar(dir) {
@@ -35,7 +39,17 @@ export default class Car {
     }
 
     show() {
-        // display.drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
-        display.drawObject(img, sx, sy, sw, sh, x, y, w, h);
+        display.drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
+        display.drawImg(
+            this.img, 
+            this.currentFrame.x, 
+            this.currentFrame.y, 
+            this.currentFrame.w, 
+            this.currentFrame.h, 
+            this.pos.x, 
+            this.pos.y, 
+            this.width, 
+            this.height
+        );
     }
 }
