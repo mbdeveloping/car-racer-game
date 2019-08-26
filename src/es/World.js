@@ -1,3 +1,4 @@
+import cars from '../cars.png';
 import {display} from './index';
 import Car from './Car';
 import Road from './Road';
@@ -10,7 +11,10 @@ export default class World {
             {isUsed: false, x: 170, y: -100},
             {isUsed: false, x: 240, y: -100}
         ],
-        this.playerCar = new Car(this.spawnPos[0].x, display.height - 200, 60, 100, 'black'),
+        // this.playerCar = new Car(this.spawnPos[0].x, display.height - 200, 60, 100, 'black'),
+        this.img = new Image();
+        this.img.src = cars;
+        this.playerCar = new Car(this.spawnPos[0].x, display.height - 200, 60, 100),
         this.playerMoveCounter = 0,
         this.spawnCounter = 0,
         this.npcCars = ["red", "green", "yellow"],
