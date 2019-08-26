@@ -19,7 +19,7 @@ export default class Display {
         this.context.fillRect(x, y, w, h);
     }
 
-    drawImg(x,y,w,h) {
-        this.context.drawImage(this.image, x, y, w, h);
+    drawImg(sx,sy,x,y,w,h) {
+        this.context.drawImage(this.image, sx, sy, x, y, w, h);
     }
 }
