@@ -11,7 +11,9 @@ export default class Car {
         this.yDir = 0,
         this.width = width,
         this.height = height,
-        this.color = color
+        this.color = color,
+        this.img = new Image(),
+        this.img.src = cars
     }
 
     moveCar(dir) {
@@ -33,6 +35,7 @@ export default class Car {
     }
 
     show() {
-        display.drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
+        // display.drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
+        display.drawObject(img, sx, sy, sw, sh, x, y, w, h);
     }
 }
