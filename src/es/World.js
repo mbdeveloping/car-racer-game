@@ -114,11 +114,13 @@ export default class World {
             if (this.playerCar.pos.x > this.spawnPos[this.playerMoveCounter].x) {
                 // console.log('right in');
                 this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
+                this.playerCar.currentFrame = this.playerCar.carsData.playerForward;
             }
         } else {
             // console.log('moving left');
             if (this.playerCar.pos.x <= this.spawnPos[this.playerMoveCounter].x) {
                 this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
+                this.playerCar.currentFrame = this.playerCar.carsData.playerForward;
             }
         }
     }

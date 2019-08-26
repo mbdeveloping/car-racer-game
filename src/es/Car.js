@@ -24,11 +24,13 @@ export default class Car {
         if (dir === -1) { //left
             if (game.world.playerMoveCounter > 0) {
                 game.world.playerMoveCounter += dir;
+                this.currentFrame = this.carsData.playerLeft;
             }
         }
         else if (dir === 1) { //right
             if (game.world.playerMoveCounter < game.world.spawnPos.length - 1) {
                 game.world.playerMoveCounter += dir;
+                this.currentFrame = this.carsData.playerRight;
             }
         }
         this.xDir = dir * 10;
@@ -39,7 +41,7 @@ export default class Car {
     }
 
     show() {
-        display.drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
+        // display.drawObject(this.pos.x, this.pos.y, this.width, this.height, this.color);
         display.drawImg(
             this.img, 
             this.currentFrame.x, 
