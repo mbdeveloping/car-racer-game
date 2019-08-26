@@ -1,4 +1,5 @@
 import {display} from './index';
+import carsData from './carsData';
 import Car from './Car';
 import Road from './Road';
 
@@ -10,11 +11,17 @@ export default class World {
             {isUsed: false, x: 170, y: -100},
             {isUsed: false, x: 240, y: -100}
         ],
+        this.carsData = carsData, 
         // this.playerCar = new Car(this.spawnPos[0].x, display.height - 200, 60, 100, 'black'),
-        this.playerCar = new Car(this.spawnPos[0].x, display.height - 200, 60, 100),
+        this.playerCar = new Car(this.spawnPos[0].x, display.height - 200, 60, 100, this.carsData.playerForward),
         this.playerMoveCounter = 0,
         this.spawnCounter = 0,
-        this.npcCars = ["red", "green", "yellow"],
+        // this.npcCars = ["red", "green", "yellow"],
+        this.npcCars = [
+            this.carsData.npc1,
+            this.carsData.npc2,
+            this.carsData.npc3
+        ],
         this.npc = [],
         this.levelData = [
             {cars: 2, speed: 2, playerSpeed: 10},
@@ -24,7 +31,7 @@ export default class World {
             {cars: 3, speed: 7, playerSpeed: 30},
             {cars: 3, speed: 10, playerSpeed: 30},
             {cars: 3, speed: 13, playerSpeed: 35}
-        ],  
+        ], 
         this.carsShowing = 1,
         this.level = 1,
         this.road = new Road(display),
@@ -43,8 +50,9 @@ export default class World {
                     this.spawnPos[0].y,
                     60,
                     100,
+                    'red',
+                    counter,
                     this.npcCars[Math.floor(Math.random() * (this.npcCars.length))],
-                    counter
                 ));
             } else {
                 if (counter === this.spawnPos.length - 1) {
@@ -114,13 +122,13 @@ export default class World {
             if (this.playerCar.pos.x > this.spawnPos[this.playerMoveCounter].x) {
                 // console.log('right in');
                 this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
-                this.playerCar.currentFrame = this.playerCar.carsData.playerForward;
+                this.playerCar.currentFrame = this.carsData.playerForward;
             }
         } else {
             // console.log('moving left');
             if (this.playerCar.pos.x <= this.spawnPos[this.playerMoveCounter].x) {
                 this.playerCar.pos.x = this.spawnPos[this.playerMoveCounter].x;
-                this.playerCar.currentFrame = this.playerCar.carsData.playerForward;
+                this.playerCar.currentFrame = this.carsData.playerForward;
             }
         }
     }

@@ -3,7 +3,7 @@ import carsData from './carsData';
 import {display, game} from './index';
 
 export default class Car {
-    constructor(x, y, width, height, color = 'brown', spawnPos = null) {
+    constructor(x, y, width, height, color = 'brown', spawnPos = null, currentFrame) {
         this.pos = {
             x: x,
             y: y    
@@ -17,7 +17,7 @@ export default class Car {
         this.img = new Image(),
         this.img.src = cars,
         this.carsData = carsData,
-        this.currentFrame = this.carsData.playerForward
+        this.currentFrame = currentFrame
     }
 
     moveCar(dir) {
