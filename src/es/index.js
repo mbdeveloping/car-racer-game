@@ -1,9 +1,9 @@
 import '../sass/style.scss';
 import Display from './Display';
 import Game from './Game';
-import Controller from './Controller';
+// import Controller from './Controller';
 
-export const display = new Display();
+export const display = new Display(300, 600);
 export const game = new Game();
 let gameStarted = false;
 // export const controller = new Controller();
@@ -59,8 +59,8 @@ function movementController() {
     });
 }
 
-movementController();
 setup();
+movementController();
 
 // window.addEventListener('keydown', controller.keyPressed);
 // window.addEventListener('keyup', controller.keyReleased);

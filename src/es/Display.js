@@ -1,12 +1,12 @@
 export default class Display {
-    constructor() {
+    constructor(w, h) {
         this.canvas = document.createElement('canvas'),
-        this.width = 300,
-        this.height = 600,
+        this.width = w,
+        this.height = h,
         this.context = this.canvas.getContext('2d')
     }
 
-    createCanvas(w,h) {
+    createCanvas() {
         const body = document.getElementById('body');
         this.canvas.width = this.width;
         this.canvas.height = this.height;
